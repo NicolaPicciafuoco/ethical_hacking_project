@@ -1,9 +1,13 @@
 # SQLINJECTION
-This project, created for educational purposes, demonstrates a deliberate vulnerability related to SQL injection.
+Welcome to the SQL Injection Challenge! This project has been created for educational purposes to demonstrate a deliberate vulnerability related to SQL injection.
+
+## Objective:
+ Discover and exploit the SQL injection vulnerability within the website. Your challenge is complete when you can successfully visit the personal information page.
 
 ## 📝 Table of Contents
 
 - [📄 About](#about)
+- [Objective](#objective)
 - [🚀 Getting Started](#getting-started)
   - [✅ Prerequisites](#prerequisites)
   - [🔧 Installation](#installation)
@@ -29,22 +33,20 @@ To run this project, you'll need the following prerequisites:
 
 Follow these steps to install and set up the project:
 
-1. Clone this repository.
+1. Clone this repository(git clone https://github.com/NicolaPicciafuoco/ethical_hacking_project.git).
 2. Install Python if you haven't already.
 3. Install Flask using `pip install Flask`.
-4. Set up the SQLite database.
 
 ## 🎮 Usage
 
 To use the project:
 
-1. Start the Flask server.
-2. Visit the login page and experiment with SQL injection.
+1. Start the Flask server whit run: flask --app app.py run
+2. Visit the login page(http://127.0.0.1:5000/) and experiment with SQL injection.
 
 ## 🤝 Contributing
 
-Contributions to improve this educational project are welcome! Please follow the guidelines outlined in the CONTRIBUTING.md file.
-
+the project was dobe by 
 ## 📜 License
 
-This project is licensed under the [License Name]. See the LICENSE file for details.
+This project is licensed under the M.I.T. license. See the LICENSE file for details.
