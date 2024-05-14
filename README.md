@@ -40,13 +40,10 @@ Follow these steps to install and set up the project:
 ## 🎮 Usage
 
 To use the project:
-
-1. Start the Flask server whit run: flask --app app.py run
-2. Visit the login page(http://127.0.0.1:5000/) and experiment with SQL injection.
-
-## 🤝 Contributing
-
-the project was dobe by 
-## 📜 License
-
-This project is licensed under the M.I.T. license. See the LICENSE file for details.
+1.
+```bash
+cd ethical_hacking_project
+```
+2. Start the Flask server whit run: flask --app app.py run
+3. Visit the login page(http://127.0.0.1:5000/) and experiment with SQL injection.
+4. Enjoy to discover the challenge
