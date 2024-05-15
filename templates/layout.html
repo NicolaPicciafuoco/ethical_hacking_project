@@ -12,7 +12,9 @@
         <nav>
             <!-- Altri link di navigazione -->
             <a href="{{ url_for('index') }}">Home</a>
+            {% if 'username' not in session %}
             <a href="{{ url_for('public_login') }}">Login</a>
+            {% endif %}
             {% if session['username'] %}
                 <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
