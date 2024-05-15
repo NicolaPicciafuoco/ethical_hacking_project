@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Wars Posts by ALICE</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+{% extends 'layout.html' %}
 
-</head>
-<body>
+{% block title %}
+    Star Wars Posts by ALICE
+{% endblock %}
+
+{% block content %}
     <header>
         <h1>Star Wars Posts by ALICE</h1>
     </header>
@@ -31,29 +28,6 @@
       <section class="post">
           <h2>Lightsaber Combat Techniques</h2>
           <p>Let's delve into the art of lightsaber combat! From the elegant Form III to the aggressive Form VII, there's much to learn about the fighting styles of the Jedi and Sith.</p>
-          <p>#Lightsaber #Combat #Jedi #Sith #ALICE</p>
-      </section>
-      
-      <section class="post">
-          <h2>Exploring the Mandalorian Culture</h2>
-          <p>Discover the rich history and traditions of the Mandalorian people. From their iconic armor to their warrior code, Mandalorians have left a lasting mark on the Star Wars universe.</p>
-          <p>#Mandalorian #Culture #Armor #StarWars #ALICE</p>
-      </section>
-      
-      <section class="post">
-          <h2>The Force Awakens: New Jedi Order</h2>
-          <p>Let's discuss the emergence of a new generation of Jedi following the fall of the Galactic Empire. What challenges do they face, and what role will they play in shaping the galaxy?</p>
-          <p>#TheForceAwakens #Jedi #GalacticEmpire #StarWars #ALICE</p>
-      </section>
-      
-      <section class="post">
-          <h2>Rogue Squadron: Legendary Pilots</h2>
-          <p>Join me as we honor the brave pilots of Rogue Squadron. From their daring missions against the Empire to their pivotal role in the Rebel Alliance, these pilots are true heroes.</p>
-          <p>#RogueSquadron #Pilots #RebelAlliance #StarWars #ALICE</p>
       </section>
     </main>
-    <footer>
-        <p>&copy; 2024 ALICE - Star Wars Enthusiast</p>
-    </footer>
-</body>
-</html>
+{% endblock %}

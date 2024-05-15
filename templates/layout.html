@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Posts by ALICE</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Altri link di navigazione -->
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if session['username'] %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <!-- Contenuto del footer -->
+        <p>Copyright © 2022</p>
+    </footer>
+</body>
+</html>

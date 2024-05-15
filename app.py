@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from functools import wraps
 import secrets
 import sqlite3
 
@@ -6,6 +7,14 @@ import sqlite3
 secrets_key = secrets.token_hex(16)
 app = Flask(__name__)
 app.secret_key = secrets_key
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session:
+            return redirect(url_for('login_page'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 #route for page of index
 @app.route('/')
@@ -49,6 +58,7 @@ def login():
         return 'Errore durante il login.'
 
 @app.route('/area_riservata')
+@login_required
 def area_riservata():
     # Ottieni il parametro user dall'URL
     user = session.get('username')
@@ -56,6 +66,11 @@ def area_riservata():
         return render_template('area_riservata.html', user=user)
     else:
         return 'Accesso negato.'
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)  
+    return redirect(url_for('index'))  
 
 if __name__ == '__main__':
     app.run(debug=True)
