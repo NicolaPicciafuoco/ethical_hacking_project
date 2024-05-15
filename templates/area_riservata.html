@@ -1,1 +1,10 @@
-<h1> Area Riservata</h1>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Area Riservata
+{% endblock %}
+
+{% block content %}
+    <h1>Area Riservata</h1>
+    <p>Benvenuto nella tua area riservata, {{ user }}</p>
+{% endblock %}
