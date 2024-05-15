@@ -1,11 +1,17 @@
 {% extends "layout.html" %}
+
 {% block content %}
-    <h2>Login</h2>
-    <form action="/login" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Login">
-    </form>
+    <div class="login-form">
+        <h2>Form di Login per amministratore del sito</h2>
+        <form action="/login" method="post">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            <input type="submit" value="Login">
+        </form>
+    </div>
 {% endblock %}
