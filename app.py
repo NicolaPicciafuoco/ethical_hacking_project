@@ -99,7 +99,8 @@ def login():
                 session['username'] = username
                 return redirect(url_for('area_riservata', user=username))
             else:
-                return 'Credenziali non valide.'
+                error = 'Credenziali non valide.'
+                return render_template('login.html', error=error)
         except Exception as e:
             print(e)
             return 'Errore durante il login.'

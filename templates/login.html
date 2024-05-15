@@ -6,6 +6,9 @@
         <input type="text" id="username" name="username"><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password"><br><br>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
         <input type="submit" value="Login">
     </form>
 {% endblock %}
