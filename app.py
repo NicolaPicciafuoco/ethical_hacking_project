@@ -10,6 +10,19 @@ app = Flask(__name__)
 app.secret_key = secrets_key
 
 def login_required(f):
+    """
+    Decorator function to require login for accessing a route.
+
+    This function checks if the 'username' key is present in the session. If not, it redirects the user to the login page.
+    If the 'username' key is present, it calls the decorated function.
+
+    Args:
+        f: The function to be decorated.
+
+    Returns:
+        The decorated function.
+
+    """
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'username' not in session:
@@ -92,9 +105,9 @@ def login():
             return 'Errore durante il login.'
 
 @app.route('/area_riservata')
-@login_required
 def area_riservata():
-    # Ottieni il parametro user dall'URL
+    if 'username' not in session:
+        return redirect(url_for('index'))
     user = session.get('username')
     if user:
         return render_template('area_riservata.html', user=user)

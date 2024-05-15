@@ -5,6 +5,9 @@
     {{ form.hidden_tag() }}
     {{ form.username.label }} {{ form.username() }}
     {{ form.password.label }} {{ form.password() }}
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
     {{ form.submit() }}
   </form>
 {% endblock %}
