@@ -24,11 +24,39 @@ def index():
 
 @app.route('/public_login', methods=['GET', 'POST'])
 def public_login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        pass
-    return render_template('public_login.html', form=form)
+    form = LoginForm(request.form)
+    if request.method == 'GET':
+        return render_template('public_login.html', form=form)
+    elif request.method == 'POST' and form.validate():
+        try:
+            username = form.username.data
+            password = form.password.data
 
+            # Connessione al database SQLite
+            conn = sqlite3.connect('mortenera.sqlite')
+            cursor = conn.cursor()
+
+            # Costruisci la query
+            query = "SELECT * FROM users WHERE username = ? AND password = ?"
+            cursor.execute(query, (username, password))
+            user = cursor.fetchone()
+
+            # Chiudi la connessione
+            conn.close()
+
+            # Controlla se l'utente esiste
+            if user:
+                session['username'] = username
+                return redirect(url_for('area_riservata', user=username))
+            else:
+                error = 'Credenziali non valide.'
+                return render_template('public_login.html', form=form, error=error)
+        except Exception as e:
+            print(e)
+            return 'Errore durante il login.'
+    else:
+        return render_template('public_login.html', form=form)
+    
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'GET':
