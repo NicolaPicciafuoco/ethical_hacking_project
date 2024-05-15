@@ -12,6 +12,7 @@
         <nav>
             <!-- Altri link di navigazione -->
             <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('public_login') }}">Login</a>
             {% if session['username'] %}
                 <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}

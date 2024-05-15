@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from functools import wraps
+from form import LoginForm
 import secrets
 import sqlite3
 
@@ -21,41 +22,46 @@ def login_required(f):
 def index():
     return render_template('index.html')
 
-#route for page of login
-@app.route('/login')
-def login_page():
-    return render_template('login.html')
+@app.route('/public_login', methods=['GET', 'POST'])
+def public_login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        pass
+    return render_template('public_login.html', form=form)
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
-    try:
-        #
-        username = request.form['username']
-        password = request.form['password']
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        try:
+            #
+            username = request.form['username']
+            password = request.form['password']
 
-        # Connessione to database SQLite
-        conn = sqlite3.connect('mortenera.sqlite')
-        cursor = conn.cursor()
+            # Connessione to database SQLite
+            conn = sqlite3.connect('mortenera.sqlite')
+            cursor = conn.cursor()
 
-        # build query
-        query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"
-        print(query)
-        # execute  query
-        cursor.execute(query)
-        user = cursor.fetchone()
+            # build query
+            query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"
+            print(query)
+            # execute  query
+            cursor.execute(query)
+            user = cursor.fetchone()
 
-        # Close connection
-        conn.close()
+            # Close connection
+            conn.close()
 
-        # Check if user exists
-        if user:
-            session['username'] = username
-            return redirect(url_for('area_riservata', user=username))
-        else:
-            return 'Credenziali non valide.'
-    except Exception as e:
-        print(e)
-        return 'Errore durante il login.'
+            # Check if user exists
+            if user:
+                session['username'] = username
+                return redirect(url_for('area_riservata', user=username))
+            else:
+                return 'Credenziali non valide.'
+        except Exception as e:
+            print(e)
+            return 'Errore durante il login.'
 
 @app.route('/area_riservata')
 @login_required
