@@ -15,6 +15,9 @@
             {% if 'username' not in session %}
             <a href="{{ url_for('public_login') }}">Login</a>
             {% endif %}
+            {% if 'username' in session %}
+            <a href="{{ url_for('area_riservata') }}">Area riservata</a>
+            {% endif %}
             {% if session['username'] %}
                 <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
@@ -25,8 +28,7 @@
     {% endblock %}
 
     <footer>
-        <!-- Contenuto del footer -->
-        <p>Copyright © 2022</p>
+        <p>Copyright &copy; 2024 - Tutti i diritti riservati.</p>
     </footer>
 </body>
 </html>
