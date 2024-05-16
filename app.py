@@ -70,10 +70,10 @@ def public_login():
     else:
         return render_template('public_login.html', form=form)
     
-@app.route('/login', methods=['GET','POST'])
+@app.route('/staff', methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('login.html')
+        return render_template('staff.html')
     elif request.method == 'POST':
         try:
             #
@@ -100,7 +100,7 @@ def login():
                 return redirect(url_for('area_riservata', user=username))
             else:
                 error = 'Credenziali non valide.'
-                return render_template('login.html', error=error)
+                return render_template('staff.html', error=error)
         except Exception as e:
             print(e)
             return 'Errore durante il login.'
