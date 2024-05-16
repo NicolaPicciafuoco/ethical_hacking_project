@@ -1,15 +1,22 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<div class="login-form"></div>
-  <h2>Login</h2>
-  <form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.username.label }} {{ form.username() }}
-    {{ form.password.label }} {{ form.password() }}
-    {% if error %}
-    <p class="error">{{ error }}</p>
-    {% endif %}
-    {{ form.submit() }}
-  </form>
+<div class="login-form">
+    <h2>Login per gli utenti del forum</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username() }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password() }}
+        </div>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        {{ form.submit() }}
+    </form>
 </div>
 {% endblock %}
