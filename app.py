@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from datetime import timedelta
+from functools import wraps
 from form import LoginForm
 import secrets
 import sqlite3
@@ -8,27 +8,27 @@ import sqlite3
 secrets_key = secrets.token_hex(16)
 app = Flask(__name__)
 app.secret_key = secrets_key
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
-# def login_required(f):
-#     """
-#     Decorator function to require login for accessing a route.
 
-#     This function checks if the 'username' key is present in the session. If not, it redirects the user to the login page.
-#     If the 'username' key is present, it calls the decorated function.
+def login_required(f):
+    """
+    Decorator function to require login for accessing a route.
 
-#     Args:
-#         f: The function to be decorated.
+    This function checks if the 'username' key is present in the session. If not, it redirects the user to the login page.
+    If the 'username' key is present, it calls the decorated function.
 
-#     Returns:
-#         The decorated function.
+    Args:
+        f: The function to be decorated.
 
-#     """
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         if 'username' not in session:
-#             return redirect(url_for('login_page'))
-#         return f(*args, **kwargs)
-#     return decorated_function
+    Returns:
+        The decorated function.
+
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session:
+            return redirect(url_for('login_page'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 #route for page of index
 @app.route('/')
@@ -60,7 +60,6 @@ def public_login():
             # Controlla se l'utente esiste
             if user:
                 session['username'] = username
-                session.permanent = True 
                 return redirect(url_for('area_riservata', user=username))
             else:
                 error = 'Credenziali non valide.'
@@ -71,10 +70,10 @@ def public_login():
     else:
         return render_template('public_login.html', form=form)
     
-@app.route('/staff', methods=['GET','POST'])
+@app.route('/keygen', methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('staff.html')
+        return render_template('keygen.html')
     elif request.method == 'POST':
         try:
             #
@@ -98,11 +97,10 @@ def login():
             # Check if user exists
             if user:
                 session['username'] = username
-                session.permanent = True 
                 return redirect(url_for('area_riservata', user=username))
             else:
                 error = 'Credenziali non valide.'
-                return render_template('staff.html', error=error)
+                return render_template('keygen.html', error=error)
         except Exception as e:
             print(e)
             return 'Errore durante il login.'
