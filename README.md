@@ -34,8 +34,8 @@ To run this project, you'll need the following prerequisites:
 Follow these steps to install and set up the project:
 
 1. Clone this repository(git clone https://github.com/NicolaPicciafuoco/ethical_hacking_project.git).
-2. Install Python if you haven't already.
-3. Install Flask using `pip install Flask`.
+2. Install Python and pip if you haven't already.
+3. Install requirements using `pip install -r requirements.txt`.
 
 ## 🎮 Usage
 
